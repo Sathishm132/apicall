@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -18,14 +18,15 @@ import './App.css';
 //       releaseDate: '2021-05-19',
 //     },
 //   ];
+
     const[newmovies,setNewmovies]=useState([])
     const[isloading,setIsloading]=useState(false)
     const[error,setError]=useState(null)
-       async function fetchhandler(){
+       const fetchhandler=useCallback(async()=>{
       setIsloading(true);
       setError(null)
       try{
-        const response=await fetch("https://swapi.dev/api/film");
+        const response=await fetch("https://swapi.dev/api/films");
         if(!response.ok){
           throw new Error("something went Wrong");
         }
@@ -45,7 +46,10 @@ import './App.css';
       } catch(error)
       {setError(error.message)}
       setIsloading(false);
-      }
+      },[])
+      useEffect(()=>{
+        fetchhandler()
+      },[fetchhandler])
     
 
   return (
