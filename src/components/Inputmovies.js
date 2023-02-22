@@ -1,29 +1,44 @@
 
+import React, { useRef } from 'react';
 
-function BasicExample() {
-    function loghandler(event){
-        event.preventDefault()
-        const title=document.getElementById("Title").value;
-        const text=document.getElementById("Text").value;
-        const date=document.getElementById("date").value;
-        const obj={
-            title:title,
-            text:text,
-            date:date
-        }
-        console.log(obj);
-    }
+import classes from './Addmovie.module.css';
+
+function AddMovie(props) {
+  const titleRef = useRef('');
+  const openingTextRef = useRef('');
+  const releaseDateRef = useRef('');
+
+  function submitHandler(event) {
+    event.preventDefault();
+
+    // could add validation here...
+
+    const movie = {
+      title: titleRef.current.value,
+      openingText: openingTextRef.current.value,
+      releaseDate: releaseDateRef.current.value,
+    };
+
+    props.onAddMovie(movie);
+  }
+
   return (
-   <form >
-    <label for="Title" >Input title</label>
-    <input id="Title" type={"text"}></input><br/>
-    <label for="Text">opening text</label>
-    <input id="Text" type={"text"}></input><br></br>
-    <label for="date">release date</label>
-    <input id="date" type={"date"}></input><br/>
-    <button onClick={loghandler}>Add new movies</button>
-   </form>
+    <form onSubmit={submitHandler}>
+      <div className={classes.control}>
+        <label htmlFor='title'>Title</label>
+        <input type='text' id='title' ref={titleRef} />
+      </div>
+      <div className={classes.control}>
+        <label htmlFor='opening-text'>Opening Text</label>
+        <textarea rows='5' id='opening-text' ref={openingTextRef}></textarea>
+      </div>
+      <div className={classes.control}>
+        <label htmlFor='date'>Release Date</label>
+        <input type='text' id='date' ref={releaseDateRef} />
+      </div>
+      <button>Add Movie</button>
+    </form>
   );
 }
 
-export default BasicExample;
+export default AddMovie;
