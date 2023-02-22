@@ -27,3 +27,14 @@ button:active {
   background-color: #460897;
   border-color: #460897;
 }
+input{
+ margin:1rem;
+ 
+ border-color: aqua;
+ 
+
+
+}
+form{
+  justify-content: space-around;
+}

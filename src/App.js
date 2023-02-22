@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
+import BasicExample from './components/Inputmovies';
 
  function App() {
 //   const dummyMovies = [
@@ -54,6 +55,9 @@ import './App.css';
 
   return (
     <React.Fragment>
+      <section>
+       
+      </section>
       <section>
         <button onClick={fetchhandler}>Fetch Movies</button>
       </section>
